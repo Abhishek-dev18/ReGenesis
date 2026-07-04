@@ -1,0 +1,62 @@
+[
+  {
+    "task_id": "add_two",
+    "prompt": "Write a function `add(a, b)` that returns the sum of two numbers a and b.",
+    "entry_point": "add",
+    "test": "def check(candidate):\n    assert candidate(2, 3) == 5\n    assert candidate(-1, 1) == 0\n    assert candidate(0, 0) == 0\n"
+  },
+  {
+    "task_id": "is_palindrome",
+    "prompt": "Write a function `is_palindrome(s)` that returns True if the string s reads the same forwards and backwards, ignoring case, False otherwise.",
+    "entry_point": "is_palindrome",
+    "test": "def check(candidate):\n    assert candidate('racecar') == True\n    assert candidate('Hello') == False\n    assert candidate('Level') == True\n"
+  },
+  {
+    "task_id": "factorial",
+    "prompt": "Write a function `factorial(n)` that returns n! for non-negative integer n. factorial(0) should be 1.",
+    "entry_point": "factorial",
+    "test": "def check(candidate):\n    assert candidate(0) == 1\n    assert candidate(5) == 120\n    assert candidate(3) == 6\n"
+  },
+  {
+    "task_id": "nth_fibonacci",
+    "prompt": "Write a function `fib(n)` that returns the nth Fibonacci number (0-indexed, fib(0)=0, fib(1)=1).",
+    "entry_point": "fib",
+    "test": "def check(candidate):\n    assert candidate(0) == 0\n    assert candidate(1) == 1\n    assert candidate(10) == 55\n"
+  },
+  {
+    "task_id": "reverse_string",
+    "prompt": "Write a function `reverse_string(s)` that returns the string s reversed.",
+    "entry_point": "reverse_string",
+    "test": "def check(candidate):\n    assert candidate('hello') == 'olleh'\n    assert candidate('') == ''\n    assert candidate('a') == 'a'\n"
+  },
+  {
+    "task_id": "count_vowels",
+    "prompt": "Write a function `count_vowels(s)` that returns the number of vowels (a, e, i, o, u, case-insensitive) in string s.",
+    "entry_point": "count_vowels",
+    "test": "def check(candidate):\n    assert candidate('Hello World') == 3\n    assert candidate('xyz') == 0\n    assert candidate('AEIOU') == 5\n"
+  },
+  {
+    "task_id": "is_prime",
+    "prompt": "Write a function `is_prime(n)` that returns True if n is a prime number, False otherwise. n is a positive integer.",
+    "entry_point": "is_prime",
+    "test": "def check(candidate):\n    assert candidate(2) == True\n    assert candidate(4) == False\n    assert candidate(17) == True\n    assert candidate(1) == False\n"
+  },
+  {
+    "task_id": "max_in_list",
+    "prompt": "Write a function `max_in_list(lst)` that returns the maximum value in a non-empty list of numbers, without using the built-in max().",
+    "entry_point": "max_in_list",
+    "test": "def check(candidate):\n    assert candidate([1, 5, 3]) == 5\n    assert candidate([-1, -5, -3]) == -1\n    assert candidate([7]) == 7\n"
+  },
+  {
+    "task_id": "remove_duplicates",
+    "prompt": "Write a function `remove_duplicates(lst)` that returns a list with duplicates removed, preserving the original order of first occurrence.",
+    "entry_point": "remove_duplicates",
+    "test": "def check(candidate):\n    assert candidate([1,2,2,3,1]) == [1,2,3]\n    assert candidate([]) == []\n    assert candidate([1,1,1]) == [1]\n"
+  },
+  {
+    "task_id": "sum_of_digits",
+    "prompt": "Write a function `sum_of_digits(n)` that returns the sum of the digits of non-negative integer n.",
+    "entry_point": "sum_of_digits",
+    "test": "def check(candidate):\n    assert candidate(123) == 6\n    assert candidate(0) == 0\n    assert candidate(9999) == 36\n"
+  }
+]
