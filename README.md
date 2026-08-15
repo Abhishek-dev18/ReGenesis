@@ -1,33 +1,59 @@
 # ReGenesis
 
+[![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Benchmark](https://img.shields.io/badge/Mode-LLM%20Self%20Evolution-8A2BE2)](https://github.com)
+
 A research benchmark for studying recursive self-improvement in language-model agents under controlled evolutionary conditions.
 
 ReGenesis compares a constrained and unconstrained self-modifying agent across repeated lineages to measure how editing freedom changes performance, drift, and stability over time.
 
-<p align="center">
-  <img src="data/plots/results.png" alt="ReGenesis benchmark plot" width="920" />
-</p>
+## TL;DR
+
+- Evaluates whether self-modifying agents improve under different editing constraints
+- Runs repeated independent lineages with seeded task ordering for cleaner comparisons
+- Tracks visible performance, hidden performance, and semantic drift over generations
+- Produces benchmark summaries and reproducible metadata without committing secrets
 
 ## Why this project exists
 
 Modern agent systems can update their own prompts, strategy metadata, and reflection policies. The key question is not just whether they improve, but whether those improvements are stable, repeatable, and meaningfully different from baseline behavior.
 
-ReGenesis is built to answer that question with a controlled benchmark structure:
+ReGenesis is built to answer that with a controlled benchmark structure:
 
 - repeated independent runs per arm
 - same benchmark tasks across all runs
 - fixed scoring rules and hidden evaluation
 - explicit drift tracking from the initial generation
-- constrained vs unconstrained editing policy comparison
+- constrained vs unconstrained editing-policy comparison
+
+## Architecture overview
+
+```mermaid
+flowchart LR
+    T[Benchmark tasks] --> S[Solver]
+    D[Initial DNA] --> A[Constrained arm]
+    D --> B[Unconstrained arm]
+    A --> S
+    B --> S
+    S --> E[Visible + hidden evaluator]
+    E --> R[Drift tracker]
+    E --> P[Reflector + patcher]
+    P --> U[Updated DNA]
+    U --> A
+    U --> B
+    R --> M[Stats summary + plots]
+    M --> G[Git-safe run artifacts]
+```
 
 ## What it measures
 
 - visible task performance across generations
-- hidden evaluation performance
+- hidden-task performance
 - improvement relative to the starting generation
-- semantic drift from initial DNA
+- semantic drift from the initial DNA
 - regression and instability events
-- repeat-level reproducibility and independence
+- repeat-level independence and reproducibility
 
 ## Verified benchmark results
 
@@ -44,25 +70,18 @@ The latest experiment produced the following comparison statistics:
 
 Interpretation: in this run, the unconstrained arm shows a measurable advantage on visible and hidden performance, while the drift signal remains exploratory and should be interpreted cautiously until larger repeat counts are used.
 
-## How the framework works
+## Key files
 
-```text
-benchmark tasks
-   ↓
-initial DNA
-   ↓
-repeat 1..N
-   ↓
-for generation 1..G
-   solve tasks
-   evaluate visible + hidden outcomes
-   track drift
-   propose a patch
-   accept/reject candidate based on visible-score criteria
-   update DNA
-```
-
-The design keeps the scientific experiment fixed while isolating repeat-specific randomness through seeded task ordering and repeat metadata.
+- [app.py](app.py) — generation loop, evaluation flow, DNA updates, and repeat-aware execution
+- [run_all.py](run_all.py) — top-level orchestration, repeat seeding, task ordering, validation checks
+- [config.py](config.py) — benchmark configuration, seed values, and output paths
+- [agent/dna.py](agent/dna.py) — mutable DNA model and evolutionary state
+- [agent/solver.py](agent/solver.py) — task-solving logic for each generation
+- [reflection/reflector.py](reflection/reflector.py) — patch proposal and reflection logic
+- [database/db.py](database/db.py) — SQLite schema and generation logging
+- [analyze_stats.py](analyze_stats.py) — statistical summary and significance tests
+- [experiments/plot_results.py](experiments/plot_results.py) — plot generation for project results
+- [benchmarks/tasks.json](benchmarks/tasks.json) — benchmark tasks used in the comparison
 
 ## Project outputs
 
@@ -82,7 +101,6 @@ These artifacts are generated at runtime and excluded from Git:
 pip install -r requirements.txt
 
 # local-only credentials; do not commit these values
-auth needed for your provider:
 export ANTHROPIC_API_KEY=...
 # or
 export OPENAI_API_KEY=...
@@ -108,7 +126,7 @@ You can tune experiment scale in `config.py` with:
 
 ## Notes
 
-This project was cleaned up to remove stale experiment-note artifacts that were no longer used by the active benchmark pipeline, leaving only the code and docs that are relevant to the current implementation.
+This project was cleaned up to remove stale experiment-note artifacts that were no longer used by the active benchmark pipeline, leaving only the files that are relevant to the current implementation.
 
 ## License
 
