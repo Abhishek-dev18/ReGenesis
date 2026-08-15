@@ -1,0 +1,8 @@
+0000000000000000000000000000000000000000 2473969ca980c8a39c95d00e51efc1359f6acb8c Abhishek <abhishekkumar200218@gmail.com> 1783162788 +0530	commit (initial): Initial commit
+2473969ca980c8a39c95d00e51efc1359f6acb8c 0000000000000000000000000000000000000000 Abhishek <abhishekkumar200218@gmail.com> 1783162887 +0530	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 2473969ca980c8a39c95d00e51efc1359f6acb8c Abhishek <abhishekkumar200218@gmail.com> 1783162887 +0530	Branch: renamed refs/heads/master to refs/heads/main
+2473969ca980c8a39c95d00e51efc1359f6acb8c 1a42d05a9368c1e557d7840aa06c32faae750076 Abhishek <abhishekkumar200218@gmail.com> 1783162899 +0530	pull origin main --allow-unrelated-histories: Merge made by the 'ort' strategy.
+1a42d05a9368c1e557d7840aa06c32faae750076 0000000000000000000000000000000000000000 Abhishek <abhishekkumar200218@gmail.com> 1783162913 +0530	Branch: renamed refs/heads/main to refs/heads/main
+1a42d05a9368c1e557d7840aa06c32faae750076 1a42d05a9368c1e557d7840aa06c32faae750076 Abhishek <abhishekkumar200218@gmail.com> 1783162913 +0530	Branch: renamed refs/heads/main to refs/heads/main
+1a42d05a9368c1e557d7840aa06c32faae750076 cacd2a9257daf66b855cc4f2352e137b156d8e19 Abhishek <abhishekkumar200218@gmail.com> 1783190368 +0530	commit: Add core agent functionality and initial configuration
+cacd2a9257daf66b855cc4f2352e137b156d8e19 8587c315c4b54dafb1a321d22c1fe35a2ccd1b84 Abhishek <abhishekkumar200218@gmail.com> 1786784910 +0530	commit: Enhance project structure and functionality:

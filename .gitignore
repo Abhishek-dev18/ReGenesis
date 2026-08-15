@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Local environment / secrets
+.env
+.env.*
+*.pem
+
+# Generated experiment artifacts
+/data/*.db
+/data/*.json
+/data/*.txt
+/data/dna_versions/
+/data/plots/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

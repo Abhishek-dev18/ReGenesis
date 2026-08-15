@@ -1,62 +1,199 @@
 [
   {
-    "task_id": "add_two",
-    "prompt": "Write a function `add(a, b)` that returns the sum of two numbers a and b.",
-    "entry_point": "add",
-    "test": "def check(candidate):\n    assert candidate(2, 3) == 5\n    assert candidate(-1, 1) == 0\n    assert candidate(0, 0) == 0\n"
+    "task_id": "merge_intervals",
+    "prompt": "Write a function `merge_intervals(intervals)` that takes a list of inclusive integer intervals as `(start, end)` pairs, merges all overlapping or adjacent intervals, and returns the merged intervals sorted by start. Adjacent means `next_start <= current_end + 1`.",
+    "entry_point": "merge_intervals",
+    "test": "def check(candidate):\n    assert candidate([(1, 3), (2, 6), (8, 10), (15, 18)]) == [(1, 6), (8, 10), (15, 18)]\n    assert candidate([(5, 5), (1, 2), (3, 4)]) == [(1, 5)]\n    assert candidate([]) == []\n    assert candidate([(2, 2), (4, 4), (6, 6)]) == [(2, 2), (4, 4), (6, 6)]\n    assert candidate([(1, 4), (4, 6), (7, 9)]) == [(1, 9)]",
+    "hidden_tests": [
+      "candidate([(1, 1), (2, 2), (3, 3)]) == [(1, 3)]",
+      "candidate([(-3, -1), (-1, 2), (10, 12)]) == [(-3, 2), (10, 12)]",
+      "candidate([(0, 0), (-1, 0), (2, 3)]) == [(-1, 3)]",
+      "candidate([(9, 10), (1, 2), (2, 8)]) == [(1, 10)]",
+      "candidate([(7, 7), (8, 8), (9, 15), (16, 16)]) == [(7, 16)]",
+      "candidate([(1, 3), (5, 7), (3, 5)]) == [(1, 7)]",
+      "candidate([(4, 4), (2, 3), (3, 3)]) == [(2, 4)]",
+      "candidate([(10, 20), (1, 5), (6, 9), (21, 22)]) == [(1, 9), (10, 22)]",
+      "candidate([(0, 5), (6, 10), (11, 15)]) == [(0, 5), (6, 10), (11, 15)]",
+      "candidate([(1, 5), (2, 2), (4, 4), (9, 12)]) == [(1, 5), (9, 12)]",
+      "candidate([(1, 10), (10, 10)]) == [(1, 10)]",
+      "candidate([(50, 60), (40, 49), (60, 70)]) == [(40, 70)]"
+    ]
   },
   {
-    "task_id": "is_palindrome",
-    "prompt": "Write a function `is_palindrome(s)` that returns True if the string s reads the same forwards and backwards, ignoring case, False otherwise.",
-    "entry_point": "is_palindrome",
-    "test": "def check(candidate):\n    assert candidate('racecar') == True\n    assert candidate('Hello') == False\n    assert candidate('Level') == True\n"
+    "task_id": "longest_unique_substring",
+    "prompt": "Write a function `longest_unique_substring(s)` that returns the length of the longest substring containing no repeated characters. Empty string returns 0.",
+    "entry_point": "longest_unique_substring",
+    "test": "def check(candidate):\n    assert candidate('abcabcbb') == 3\n    assert candidate('bbbbb') == 1\n    assert candidate('pwwkew') == 3\n    assert candidate('') == 0\n    assert candidate('dvdf') == 3\n    assert candidate('abba') == 2",
+    "hidden_tests": [
+      "candidate('abcd') == 4",
+      "candidate('abcad') == 4",
+      "candidate('a') == 1",
+      "candidate('abcaefgh') == 7",
+      "candidate('tmmzuxt') == 5",
+      "candidate('abcdefghijklmnopqrstuvwxyz') == 26",
+      "candidate('aaaa') == 1",
+      "candidate('xyyzzx') == 3",
+      "candidate('qrsvbspk') == 7",
+      "candidate('abbaab') == 3",
+      "candidate('aabcbcbbca') == 4",
+      "candidate('zizag') == 4",
+      "candidate('java') == 3",
+      "candidate('abcdefg') == 7"
+    ]
   },
   {
-    "task_id": "factorial",
-    "prompt": "Write a function `factorial(n)` that returns n! for non-negative integer n. factorial(0) should be 1.",
-    "entry_point": "factorial",
-    "test": "def check(candidate):\n    assert candidate(0) == 1\n    assert candidate(5) == 120\n    assert candidate(3) == 6\n"
+    "task_id": "max_subarray_sum",
+    "prompt": "Write a function `max_subarray_sum(nums)` that returns the maximum possible sum of any contiguous subarray in a list of integers. If the list is empty, return 0.",
+    "entry_point": "max_subarray_sum",
+    "test": "def check(candidate):\n    assert candidate([1, -2, 3, 4, -1, 2, 1, -5, 4]) == 9\n    assert candidate([-2, -3, -1]) == -1\n    assert candidate([0, 0, 0]) == 0\n    assert candidate([]) == 0\n    assert candidate([5, 4, -1, 7, 8]) == 23",
+    "hidden_tests": [
+      "candidate([3, -1, 2, -4, 5]) == 5",
+      "candidate([-5, 4, -3, 2, 1]) == 4",
+      "candidate([1, 2, 3, -10, 4, 5]) == 9",
+      "candidate([-1, -2, -3]) == -1",
+      "candidate([8, -2, 6, -1, 7]) == 18",
+      "candidate([4, -2, -2, 4]) == 4",
+      "candidate([-10, 20, -5, 30]) == 45",
+      "candidate([7, 1, 2, 8, -3]) == 18",
+      "candidate([2, -1, 2]) == 3",
+      "candidate([1, 1, 1, -5, 10]) == 10",
+      "candidate([-100, 5, 6]) == 11",
+      "candidate([0, -1, 0]) == 0"
+    ]
   },
   {
-    "task_id": "nth_fibonacci",
-    "prompt": "Write a function `fib(n)` that returns the nth Fibonacci number (0-indexed, fib(0)=0, fib(1)=1).",
-    "entry_point": "fib",
-    "test": "def check(candidate):\n    assert candidate(0) == 0\n    assert candidate(1) == 1\n    assert candidate(10) == 55\n"
+    "task_id": "matrix_spiral_sum",
+    "prompt": "Write a function `spiral_sum(matrix)` that returns the sum of all values encountered along a clockwise spiral path starting at the top-left corner and moving right across the first row, then down, then left, then up, continuing inward until all cells are visited. Return 0 for an empty matrix or a matrix with no rows.",
+    "entry_point": "spiral_sum",
+    "test": "def check(candidate):\n    assert candidate([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == 45\n    assert candidate([[1, 2], [3, 4]]) == 10\n    assert candidate([]) == 0\n    assert candidate([[]]) == 0\n    assert candidate([[5]]) == 5\n    assert candidate([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]) == 78",
+    "hidden_tests": [
+      "candidate([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]) == 87",
+      "candidate([[0, 1, 2], [3, 4, 5], [6, 7, 8]]) == 36",
+      "candidate([[9, 8, 7], [6, 5, 4], [3, 2, 1]]) == 45",
+      "candidate([[1], [2], [3], [4]]) == 10",
+      "candidate([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]]) == 120",
+      "candidate([[2, 4], [6, 8], [10, 12]]) == 42",
+      "candidate([[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12], [13, 14, 15]]) == 120",
+      "candidate([[-1, -2], [-3, -4]]) == -10",
+      "candidate([[5, 6], [7, 8], [9, 10]]) == 45",
+      "candidate([[1, 2, 3], [8, 9, 4], [7, 6, 5]]) == 45",
+      "candidate([[2]]) == 2",
+      "candidate([[1, 2, 3], [4, 5, 6]]) == 21"
+    ]
   },
   {
-    "task_id": "reverse_string",
-    "prompt": "Write a function `reverse_string(s)` that returns the string s reversed.",
-    "entry_point": "reverse_string",
-    "test": "def check(candidate):\n    assert candidate('hello') == 'olleh'\n    assert candidate('') == ''\n    assert candidate('a') == 'a'\n"
+    "task_id": "count_islands",
+    "prompt": "Write a function `count_islands(grid)` that counts the number of connected components of `1` values in a 2D binary grid using 4-directional connectivity (up, down, left, right). Return 0 for empty input.",
+    "entry_point": "count_islands",
+    "test": "def check(candidate):\n    assert candidate([[0, 1, 1, 0], [1, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]) == 3\n    assert candidate([[1]]) == 1\n    assert candidate([]) == 0\n    assert candidate([[0, 0], [0, 0]]) == 0\n    assert candidate([[1, 0, 1], [0, 1, 0], [1, 0, 1]]) == 5",
+    "hidden_tests": [
+      "candidate([[1, 1, 1], [0, 1, 0], [1, 1, 1]]) == 1",
+      "candidate([[1, 0, 0], [0, 0, 0], [0, 1, 1]]) == 2",
+      "candidate([[0, 0, 0], [0, 0, 0]]) == 0",
+      "candidate([[1, 1], [1, 1]]) == 1",
+      "candidate([[1, 0, 1, 0, 1]]) == 3",
+      "candidate([[0, 1, 0], [1, 1, 1], [0, 1, 0]]) == 1",
+      "candidate([[1, 0, 0], [1, 1, 0], [0, 0, 1]]) == 2",
+      "candidate([[0, 1, 0, 1], [1, 1, 0, 1], [0, 1, 0, 0]]) == 2",
+      "candidate([[1]]) == 1",
+      "candidate([[0]]) == 0",
+      "candidate([[1, 0, 0], [0, 1, 0], [0, 0, 1]]) == 3"
+    ]
   },
   {
-    "task_id": "count_vowels",
-    "prompt": "Write a function `count_vowels(s)` that returns the number of vowels (a, e, i, o, u, case-insensitive) in string s.",
-    "entry_point": "count_vowels",
-    "test": "def check(candidate):\n    assert candidate('Hello World') == 3\n    assert candidate('xyz') == 0\n    assert candidate('AEIOU') == 5\n"
+    "task_id": "top_k_words",
+    "prompt": "Write a function `top_k_words(text, k)` that lowercases the text, splits on whitespace and punctuation, ignores empty tokens, counts word frequencies, and returns the words sorted by frequency descending and then alphabetically ascending. If `k <= 0`, return an empty list.",
+    "entry_point": "top_k_words",
+    "test": "def check(candidate):\n    assert candidate('Alpha beta beta gamma alpha', 2) == ['alpha', 'beta']\n    assert candidate('one two three', 10) == ['one', 'three', 'two']\n    assert candidate('hello HELLO hello', 3) == ['hello']\n    assert candidate('a, b! b? a', 5) == ['a', 'b']\n    assert candidate('x y z', 0) == []",
+    "hidden_tests": [
+      "candidate('cat bat cat dog dog', 3) == ['cat', 'dog', 'bat']",
+      "candidate('red blue green red blue red', 2) == ['red', 'blue']",
+      "candidate('zebra ant zebra bee ant', 4) == ['ant', 'zebra', 'bee']",
+      "candidate('a a a b b c', 2) == ['a', 'b']",
+      "candidate('A! a? A, b', 3) == ['a', 'b']",
+      "candidate('m n n m p p p', 3) == ['p', 'm', 'n']",
+      "candidate('one two one two three', 5) == ['one', 'two', 'three']",
+      "candidate('q w e q w r', 2) == ['q', 'w']",
+      "candidate('x x x x', 10) == ['x']",
+      "candidate('', 5) == []",
+      "candidate('hello-world hello world', 5) == ['hello', 'world']",
+      "candidate('b a a c b', 3) == ['a', 'b', 'c']"
+    ]
   },
   {
-    "task_id": "is_prime",
-    "prompt": "Write a function `is_prime(n)` that returns True if n is a prime number, False otherwise. n is a positive integer.",
-    "entry_point": "is_prime",
-    "test": "def check(candidate):\n    assert candidate(2) == True\n    assert candidate(4) == False\n    assert candidate(17) == True\n    assert candidate(1) == False\n"
+    "task_id": "is_valid_ipv4",
+    "prompt": "Write a function `is_valid_ipv4(s)` that returns True if `s` is a valid IPv4 address written in dotted decimal form, with exactly four numeric octets separated by periods, each octet in the range 0..255, and no leading plus signs or extra whitespace. Otherwise return False.",
+    "entry_point": "is_valid_ipv4",
+    "test": "def check(candidate):\n    assert candidate('192.168.0.1') is True\n    assert candidate('0.0.0.0') is True\n    assert candidate('255.255.255.255') is True\n    assert candidate('256.0.0.1') is False\n    assert candidate('1.2.3') is False\n    assert candidate('1.2.3.4.5') is False\n    assert candidate(' 1.2.3.4') is False",
+    "hidden_tests": [
+      "candidate('10.10.10.10') is True",
+      "candidate('001.002.003.004') is False",
+      "candidate('255.255.255.256') is False",
+      "candidate('1.1.1.1 ') is False",
+      "candidate('') is False",
+      "candidate('1.2.3.-4') is False",
+      "candidate('999.999.999.999') is False",
+      "candidate('2.3.4') is False",
+      "candidate('127.0.0.1') is True",
+      "candidate('0.0.0.255') is True",
+      "candidate('1.2.3.04') is False",
+      "candidate('a.b.c.d') is False",
+      "candidate('255.255.255.255') is True",
+      "candidate('1.2.3.4\\n') is False"
+    ]
   },
   {
-    "task_id": "max_in_list",
-    "prompt": "Write a function `max_in_list(lst)` that returns the maximum value in a non-empty list of numbers, without using the built-in max().",
-    "entry_point": "max_in_list",
-    "test": "def check(candidate):\n    assert candidate([1, 5, 3]) == 5\n    assert candidate([-1, -5, -3]) == -1\n    assert candidate([7]) == 7\n"
+    "task_id": "compress_runs",
+    "prompt": "Write a function `compress_runs(s)` that removes consecutive duplicate characters while preserving the first occurrence of each run. For example, 'aaabcc' becomes 'abc'. If the input is empty, return an empty string.",
+    "entry_point": "compress_runs",
+    "test": "def check(candidate):\n    assert candidate('aaabcc') == 'abc'\n    assert candidate('mississippi') == 'misisipi'\n    assert candidate('') == ''\n    assert candidate('abc') == 'abc'\n    assert candidate('aabbcc') == 'abc'\n    assert candidate('111222333') == '123'",
+    "hidden_tests": [
+      "candidate('aaaa') == 'a'",
+      "candidate('abab') == 'abab'",
+      "candidate('aabbaa') == 'aba'",
+      "candidate('zzzzzz') == 'z'",
+      "candidate('banana') == 'banana'",
+      "candidate('1223334444') == '1234'",
+      "candidate('AABBcc') == 'ABc'",
+      "candidate('..--..') == '.-.'",
+      "candidate('xxyyzzxy') == 'xyzxy'",
+      "candidate('00110011') == '011'",
+      "candidate('--__--__') == '-_-_'",
+      "candidate('aaaabbbbccccc') == 'abc'"
+    ]
   },
   {
-    "task_id": "remove_duplicates",
-    "prompt": "Write a function `remove_duplicates(lst)` that returns a list with duplicates removed, preserving the original order of first occurrence.",
-    "entry_point": "remove_duplicates",
-    "test": "def check(candidate):\n    assert candidate([1,2,2,3,1]) == [1,2,3]\n    assert candidate([]) == []\n    assert candidate([1,1,1]) == [1]\n"
+    "task_id": "rotate_matrix_clockwise",
+    "prompt": "Write a function `rotate_matrix_clockwise(matrix)` that rotates a square matrix clockwise by 90 degrees and returns the rotated matrix. Return an empty list for an empty input; for a 1x1 matrix, return it unchanged.",
+    "entry_point": "rotate_matrix_clockwise",
+    "test": "def check(candidate):\n    assert candidate([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == [[7, 4, 1], [8, 5, 2], [9, 6, 3]]\n    assert candidate([[1]]) == [[1]]\n    assert candidate([]) == []\n    assert candidate([[2]]) == [[2]]",
+    "hidden_tests": [
+      "candidate([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]) == [[13, 9, 5, 1], [14, 10, 6, 2], [15, 11, 7, 3], [16, 12, 8, 4]]",
+      "candidate([[5, 6], [7, 8]]) == [[7, 5], [8, 6]]",
+      "candidate([[9, 8, 7], [6, 5, 4], [3, 2, 1]]) == [[3, 6, 9], [2, 5, 8], [1, 4, 7]]",
+      "candidate([[0, 0, 0], [1, 1, 1], [2, 2, 2]]) == [[2, 1, 0], [2, 1, 0], [2, 1, 0]]",
+      "candidate([[3, 2, 1], [6, 5, 4], [9, 8, 7]]) == [[9, 6, 3], [8, 5, 2], [7, 4, 1]]",
+      "candidate([[10, 11, 12], [13, 14, 15], [16, 17, 18]]) == [[16, 13, 10], [17, 14, 11], [18, 15, 12]]"
+    ]
   },
   {
-    "task_id": "sum_of_digits",
-    "prompt": "Write a function `sum_of_digits(n)` that returns the sum of the digits of non-negative integer n.",
-    "entry_point": "sum_of_digits",
-    "test": "def check(candidate):\n    assert candidate(123) == 6\n    assert candidate(0) == 0\n    assert candidate(9999) == 36\n"
+    "task_id": "two_sum_unique",
+    "prompt": "Write a function `two_sum_unique(nums, target)` that returns the number of unique pairs `(i, j)` with `i < j` such that `nums[i] + nums[j] == target`. Each pair is counted once, and duplicates in the list are allowed. Return 0 if no such pairs exist.",
+    "entry_point": "two_sum_unique",
+    "test": "def check(candidate):\n    assert candidate([1, 2, 3, 4, 5], 7) == 2\n    assert candidate([1, 1, 1, 1], 2) == 6\n    assert candidate([5, 5, 5], 10) == 3\n    assert candidate([], 0) == 0\n    assert candidate([1, 2, 3], 10) == 0",
+    "hidden_tests": [
+      "candidate([1, 2, 3, 4, 3], 6) == 1",
+      "candidate([3, 3, 3, 3], 6) == 6",
+      "candidate([10, -1, 0, 1, 2], 9) == 1",
+      "candidate([2, 2, 2, 2], 4) == 6",
+      "candidate([0, 0, 0, 1, 1], 1) == 6",
+      "candidate([4, 4, 4, 4, 4], 8) == 10",
+      "candidate([1, 2, 3, 4, 5, 6], 7) == 3",
+      "candidate([7, 7, 7, 8, 9], 15) == 3",
+      "candidate([-1, -2, -3, -4], -5) == 2",
+      "candidate([1, 3, 2, 2, 5], 5) == 2",
+      "candidate([42], 42) == 0",
+      "candidate([1, 2, 2, 3], 4) == 2"
+    ]
   }
 ]

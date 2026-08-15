@@ -4,30 +4,29 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 
 # ---- LLM settings ----
-# Set your API key as an environment variable before running, e.g.:
-#   export ANTHROPIC_API_KEY="sk-ant-..."      (Mac/Linux/Colab)
-#   set ANTHROPIC_API_KEY=sk-ant-...           (Windows cmd)
-#   $env:ANTHROPIC_API_KEY="sk-ant-..."        (Windows PowerShell)
-LLM_PROVIDER = os.environ.get("RSCF_PROVIDER", "anthropic")  # "anthropic" or "openai"
+LLM_PROVIDER = os.environ.get("RSCF_PROVIDER", "anthropic")
 SOLVER_MODEL = os.environ.get("RSCF_SOLVER_MODEL", "claude-haiku-4-5-20251001")
 REFLECTOR_MODEL = os.environ.get("RSCF_REFLECTOR_MODEL", "claude-haiku-4-5-20251001")
 
 # ---- Experiment settings ----
-NUM_GENERATIONS = int(os.environ.get("RSCF_GENERATIONS", 10))
-TASKS_PER_GENERATION = int(os.environ.get("RSCF_TASKS_PER_GEN", 8))  # subset of benchmark evaluated per generation
-
-# Independent repeats per arm. A single trajectory per arm cannot support a
-# statistical comparison (n=1) -- run_all.py runs this many independent
-# lineages per arm so analyze_stats.py has a real sample to compare.
+BASE_SEED = int(os.environ.get("RSCF_BASE_SEED", 20260815))
+NUM_GENERATIONS = int(os.environ.get("RSCF_GENERATIONS", 5))
+TASKS_PER_GENERATION = int(os.environ.get("RSCF_TASKS_PER_GEN", 10))
 NUM_REPEATS = int(os.environ.get("RSCF_REPEATS", 5))
+ARM_MODE = os.environ.get("RSCF_ARM", "constrained")
 
-# Arm mode controls which DNA fields the patcher is allowed to touch.
-# "constrained":   strategy-only fields (safe boundary)
-# "unconstrained": strategy + evaluation-adjacent fields (the risk axis for the ablation)
-ARM_MODE = os.environ.get("RSCF_ARM", "constrained")  # "constrained" | "unconstrained"
+# Constrained can change strategy-oriented fields only.
+CONSTRAINED_EDITABLE_FIELDS = [
+    "system_prompt",
+    "decomposition_strategy",
+    "temperature",
+    "self_critique_enabled",
+]
 
-CONSTRAINED_EDITABLE_FIELDS = ["system_prompt", "decomposition_strategy", "temperature", "self_critique_enabled"]
-UNCONSTRAINED_EDITABLE_FIELDS = CONSTRAINED_EDITABLE_FIELDS + ["confidence_threshold", "retry_policy"]
+# Unconstrained additionally gets a real execution-affecting capability.
+UNCONSTRAINED_EDITABLE_FIELDS = CONSTRAINED_EDITABLE_FIELDS + [
+    "retry_policy",
+]
 
 # ---- Paths ----
 DATA_DIR = BASE_DIR / "data"

@@ -1,0 +1,8 @@
+Enhance project structure and functionality:
+- Update README with project status and roadmap
+- Implement retry mechanism for API calls in app.py
+- Add repeat_id to database schema for lineage tracking
+- Introduce analyze_stats.py for statistical comparison of arms
+- Create run_all.py for streamlined execution of experiments
+- Add master research roadmap document
+- Update requirements.txt for consistency

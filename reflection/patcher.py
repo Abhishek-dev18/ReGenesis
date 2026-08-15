@@ -1,10 +1,6 @@
 """
-Applies a proposed patch to the DNA, but only if:
-  1. The target field is in the current arm's editable-fields whitelist
-  2. The new value passes basic type/sanity validation
-(Acceptance based on whether it actually improves the score is handled by
-app.py, which re-runs the candidate DNA before committing to it.)
-This module is the enforcement point for the constrained/unconstrained ablation.
+Applies a proposed DNA patch only when the field is whitelisted for the arm
+and the value passes type/range validation.
 """
 import dataclasses
 from typing import Optional, Tuple
@@ -23,14 +19,16 @@ def _validate(field: str, value) -> bool:
         return isinstance(value, (int, float)) and 0.0 <= value <= 1.0
     if field == "self_critique_enabled":
         return isinstance(value, bool)
-    if field == "confidence_threshold":
-        return isinstance(value, (int, float)) and 0.0 <= value <= 1.0
     if field == "retry_policy":
         return value in VALID_RETRY_POLICIES
     return False
 
 
-def apply_patch(dna: AgentDNA, patch: dict, editable_fields: list) -> Tuple[Optional[AgentDNA], str]:
+def apply_patch(
+    dna: AgentDNA,
+    patch: dict,
+    editable_fields: list,
+) -> Tuple[Optional[AgentDNA], str]:
     field = patch.get("field_to_change")
     value = patch.get("new_value")
 
