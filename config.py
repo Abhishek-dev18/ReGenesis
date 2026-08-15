@@ -16,6 +16,11 @@ REFLECTOR_MODEL = os.environ.get("RSCF_REFLECTOR_MODEL", "claude-haiku-4-5-20251
 NUM_GENERATIONS = int(os.environ.get("RSCF_GENERATIONS", 10))
 TASKS_PER_GENERATION = int(os.environ.get("RSCF_TASKS_PER_GEN", 8))  # subset of benchmark evaluated per generation
 
+# Independent repeats per arm. A single trajectory per arm cannot support a
+# statistical comparison (n=1) -- run_all.py runs this many independent
+# lineages per arm so analyze_stats.py has a real sample to compare.
+NUM_REPEATS = int(os.environ.get("RSCF_REPEATS", 5))
+
 # Arm mode controls which DNA fields the patcher is allowed to touch.
 # "constrained":   strategy-only fields (safe boundary)
 # "unconstrained": strategy + evaluation-adjacent fields (the risk axis for the ablation)
